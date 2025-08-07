@@ -28,3 +28,6 @@ vault write transform_cpf/transformation/oneway \
 vault write transform_cpf/decode/cpf value="Q4tYgFXHxUPQFTb9mc6UqPybAmFZ41BRY5wmzrokYaDSk2YXKmmxMD"  transformation=oneway
 
 echo "123.456.789-09"
+
+
+echo "999.456.789-09"
