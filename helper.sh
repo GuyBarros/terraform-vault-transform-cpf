@@ -6,6 +6,7 @@ vault write transform_cpf/decode/cpf value="###.###.###-##"  transformation=mask
 
 vault write transform_cpf/encode/cpf value="123.456.789-09"  transformation=masking_cpf
 
+vault write transform_cpf/encode/cpf value="123.456.789-99"  transformation=masking_cpf
 
 vault write transform_cpf/decode/cpf value="Q4tYgFXHxUb3ttDFMGgY97vAY1Q1qdB12HvpiHuFP4hrYR2c416S8p"  transformation=tokenization_cpf
 
