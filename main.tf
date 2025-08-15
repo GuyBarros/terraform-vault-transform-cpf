@@ -12,12 +12,21 @@ resource "vault_transform_role" "role" {
     vault_transform_transformation.cpf-tokenization.name,
     vault_transform_transformation.cnpj-fpe.name,
     vault_transform_transformation.cnpj-masking.name,
-  vault_transform_transformation.cnpj-tokenization.name,
+    vault_transform_transformation.cnpj-tokenization.name,
     vault_transform_transformation.email-fpe.name,
     vault_transform_transformation.email-masking.name,
-    vault_transform_transformation.email-tokenization.name]
+    vault_transform_transformation.email-tokenization.name,
+    vault_transform_transformation.nome-fpe.name,
+    vault_transform_transformation.nome-masking.name,
+    vault_transform_transformation.nome-tokenization.name,
+    vault_transform_transformation.endereco-fpe.name,
+    vault_transform_transformation.endereco-masking.name,
+    vault_transform_transformation.endereco-tokenization.name,
+    vault_transform_transformation.telefone-fpe.name,
+    vault_transform_transformation.telefone-masking.name,
+    vault_transform_transformation.telefone-tokenization.name,
+    vault_transform_transformation.cartao_credito-fpe.name,
+    vault_transform_transformation.cartao_credito-masking.name,
+    vault_transform_transformation.cartao_credito-tokenization.name,
+    ]
 }
-
-
-
-
