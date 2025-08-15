@@ -9,3 +9,19 @@ output "cnpj_enconded_value" {
 output "email_enconded_value" {
   value = data.vault_transform_encode.email-test.batch_results
 }
+
+output "nome_enconded_value" {
+  value = data.vault_transform_encode.nome-test.batch_results
+}
+
+output "endereco_enconded_value" {
+  value = data.vault_transform_encode.endereco-test.batch_results
+}
+
+output "telefone_enconded_value" {
+  value = data.vault_transform_encode.telefone-test.batch_results
+}
+
+output "cartao_credito_enconded_value" {
+  value = data.vault_transform_encode.cartao_credito-test.batch_results
+}
