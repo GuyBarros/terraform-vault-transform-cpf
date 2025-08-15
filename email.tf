@@ -2,8 +2,8 @@ resource "vault_transform_template" "email-template" {
   path     = vault_mount.transform.path
   name     = "email"
   type     = "regex"
-  pattern  = "([a-z0-9._%+-]+)@([a-z0-9.-]+\\.[a-z]{2,}(?:\\.[a-z]{2,})?)"
-  alphabet = "builtin/alphanumeric-lower"
+  pattern  = "^([A-Za-z0-9._%+\\-&]+)@([A-Za-z0-9._%+\\-&]+)$"
+  alphabet = vault_transform_alphabet.general_email_alphabet.name
 }
 
 #FPE Encode
@@ -32,7 +32,7 @@ resource "vault_transform_transformation" "email-masking" {
 #Tokenization
 resource "vault_transform_transformation" "email-tokenization" {
   path             = vault_mount.transform.path
-  name             = "transform_email"
+  name             = "tokenization_email"
   type             = "tokenization"
   tweak_source     = "internal"
   allowed_roles    = ["*"]
