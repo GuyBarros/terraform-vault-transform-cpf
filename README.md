@@ -1,4 +1,5 @@
 # terraform-vault-transform-cpf
+(this documentation is AI generated and the only part of the code which is AI generated.. sorry - GB)
 
 Codebase to provision **HashiCorp Vault Transform** configurations (FPE/tokenization/masking) for **Brazilian CPF**, **CNPJ**, and **email** using **Terraform**.
 
