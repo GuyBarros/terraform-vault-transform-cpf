@@ -32,7 +32,7 @@ resource "vault_transform_transformation" "cpf-masking" {
 #Tokenization
 resource "vault_transform_transformation" "cpf-tokenization" {
   path             = vault_mount.transform.path
-  name             = "transform_cpf"
+  name             = "tokenization_cpf"
   type             = "tokenization"
   tweak_source     = "internal"
   allowed_roles    = ["*"]

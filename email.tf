@@ -32,7 +32,7 @@ resource "vault_transform_transformation" "email-masking" {
 #Tokenization
 resource "vault_transform_transformation" "email-tokenization" {
   path             = vault_mount.transform.path
-  name             = "transform_email"
+  name             = "tokenization_email"
   type             = "tokenization"
   tweak_source     = "internal"
   allowed_roles    = ["*"]
