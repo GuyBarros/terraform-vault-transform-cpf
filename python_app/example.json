@@ -1,0 +1,14 @@
+{
+    "name": "Marcos Antônio Ferreira",
+    "cpf": "327.456.789-1*",
+    "address": "Rua das Palmeiras, 145 – São Paulo/SP",
+    "bank_account_number": "00345678-",
+    "bank_agency": "1350",
+    "requested_loan_amount_brl_text": "R$ 780.000,00",
+    "requested_loan_amount_brl": 780000.00,
+    "proof_of_income": [
+        "Holerites Dez/2024",
+        "Holerites Jan/2025",
+        "Holerites Fev/2025"
+    ]
+}
