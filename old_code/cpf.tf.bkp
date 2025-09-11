@@ -1,0 +1,69 @@
+resource "vault_transform_template" "cpf-template" {
+  path     = vault_mount.transform.path
+  name     = "brazilian_cpf"
+  type     = "regex"
+  pattern  = "(\\d{3}).(\\d{3}).(\\d{3})-(\\d{2})"
+  alphabet = "builtin/numeric"
+}
+
+#Deterministic FPE
+resource "vault_transform_transformation" "cpf-fpe" {
+  path             = vault_mount.transform.path
+  name             = "cpf-fpe"
+  type             = "fpe"
+  template         = vault_transform_template.cpf-template.name
+  tweak_source     = "internal"
+  allowed_roles    = ["*"]
+  deletion_allowed = true
+}
+resource "vault_transform_transformation" "deterministic-cpf-fpe" {
+  path             = vault_mount.transform.path
+  name             = "fpe_cpf_deterministic"
+  type             = "fpe"
+  template         = vault_transform_template.cpf-template.name
+  tweak_source     = "internal"
+  allowed_roles    = ["*"]
+  deletion_allowed = true
+}
+#Non Deterministic FPE Encode
+resource "vault_transform_transformation" "non_deterministic-cpf-fpe" {
+  path             = vault_mount.transform.path
+  name             = "non_fpe_cpf_deterministic"
+  type             = "fpe"
+  template         = vault_transform_template.cpf-template.name
+  tweak_source     = "generated"
+  allowed_roles    = ["*"]
+  deletion_allowed = true
+}
+
+#Masking
+resource "vault_transform_transformation" "cpf-masking" {
+  path              = vault_mount.transform.path
+  name              = "masking_cpf"
+  type              = "masking"
+  masking_character = "#"
+  template          = vault_transform_template.cpf-template.name
+  tweak_source      = "internal"
+  allowed_roles     = ["*"]
+  deletion_allowed  = true
+}
+
+#Tokenization
+resource "vault_transform_transformation" "cpf-tokenization" {
+  path             = vault_mount.transform.path
+  name             = "tokenization_cpf"
+  type             = "tokenization"
+  tweak_source     = "internal"
+  allowed_roles    = ["*"]
+  deletion_allowed = true
+}
+
+data "vault_transform_encode" "cpf-test" {
+  path      = vault_transform_role.role.path
+  role_name = vault_transform_role.role.name
+
+  batch_input = [{ "value" : "123.456.789-09", "transformation" : vault_transform_transformation.cpf-fpe.name },
+    { "value" : "123.456.789-09", "transformation" : vault_transform_transformation.cpf-masking.name },
+    { "value" : "123.456.789-09", "transformation" : vault_transform_transformation.cpf-tokenization.name }
+  ]
+}
