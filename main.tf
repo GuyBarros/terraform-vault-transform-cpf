@@ -1,4 +1,4 @@
-module "example" {
-  source = "./example"
-
+resource "vault_mount" "transform" {
+  path = "org"
+  type = "transform"
 }

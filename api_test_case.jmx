@@ -5,29 +5,14 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
-      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
-        <collectionProp name="HeaderManager.headers">
-          <elementProp name="" elementType="Header">
-            <stringProp name="Header.name">X-Vault-Request</stringProp>
-            <stringProp name="Header.value">true</stringProp>
-          </elementProp>
-          <elementProp name="" elementType="Header">
-            <stringProp name="Header.name">X-Vault-Namespace</stringProp>
-            <stringProp name="Header.value">admin</stringProp>
-          </elementProp>
-          <elementProp name="" elementType="Header">
-            <stringProp name="Header.name">X-Vault-Token</stringProp>
-            <stringProp name="Header.value"></stringProp>
-          </elementProp>
-        </collectionProp>
-      </HeaderManager>
-      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="transformation-encode">
-        <intProp name="ThreadGroup.num_threads">5</intProp>
+        <intProp name="ThreadGroup.num_threads">10</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
-        <longProp name="ThreadGroup.duration">60</longProp>
+        <longProp name="ThreadGroup.duration">600</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -38,10 +23,10 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="batch-encode">
-          <stringProp name="HTTPSampler.domain">vault.guystack1.guy.aws.sbx.hashicorpdemo.com</stringProp>
+          <stringProp name="HTTPSampler.domain">vault-for-rfi-ibm-itau-a23a5e6b02259ac6.elb.us-east-2.amazonaws.com</stringProp>
           <stringProp name="HTTPSampler.port">8200</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.path">/v1/transform_brazilian_pii/encode/transformacao</stringProp>
+          <stringProp name="HTTPSampler.path">/v1/transform_brazilian_pii/encode/agent</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -52,14 +37,15 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{ &#xd;
   &quot;batch_input&quot;:[{ &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;fpe_cpf&quot; },&#xd;
-    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;masking_cnpj&quot; },&#xd;
-    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;fpe_cpf&quot; },&#xd;
-    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;masking_cnpj&quot; },&#xd;
-    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;fpe_cpf&quot; },&#xd;
-    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;masking_cnpj&quot; },&#xd;
-    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;fpe_cpf&quot; },&#xd;
-    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;masking_cnpj&quot; },&#xd;
-    { &quot;value&quot; : &quot;myreal@email.com&quot;, &quot;transformation&quot; : &quot;tokenization_email&quot;, &quot;ttl&quot; : &quot;8h&quot;, &quot;metadata&quot; : { &quot;Organization&quot; : &quot;HashiCorp&quot;, &quot;Purpose&quot; : &quot;Travel&quot;, &quot;Type&quot; : &quot;AMEX&quot; } }&#xd;
+    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf_fpe_non_deterministic&quot; },&#xd;
+    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj_partial_masking&quot; },&#xd;
+    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf_fpe_non_deterministic&quot; },&#xd;
+    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj_partial_masking&quot; },&#xd;
+    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf_fpe_non_deterministic&quot; },&#xd;
+    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj_partial_masking&quot; },&#xd;
+    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf_fpe_non_deterministic&quot; },&#xd;
+    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj_partial_masking&quot; },&#xd;
+    { &quot;value&quot; : &quot;myreal@email.com&quot;, &quot;transformation&quot; : &quot;tokenization_non_convergent&quot;, &quot;ttl&quot; : &quot;8h&quot;, &quot;metadata&quot; : { &quot;Organization&quot; : &quot;IBM&quot;, &quot;Purpose&quot; : &quot;Finance&quot;, &quot;Type&quot; : &quot;BR_PII&quot; } } &#xd;
   ]&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
@@ -80,6 +66,10 @@
               </elementProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">X-Vault-Token</stringProp>
+                <stringProp name="Header.value"></stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name"></stringProp>
                 <stringProp name="Header.value"></stringProp>
               </elementProp>
             </collectionProp>

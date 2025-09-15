@@ -1,8 +1,9 @@
 {
-    "name": "Marcos Antônio Ferreira",
-    "cpf": "327.456.789-1*",
-    "address": "Rua das Palmeiras, 145 – São Paulo/SP",
-    "bank_account_number": "00345678-",
+    "name": "Guy Example",
+    "cpf": "327.456.789-19",
+    "cnpj": "76.537.694/0001-62",
+    "address": "Rua das Palmeiras, 145 - São Paulo/SP",
+    "bank_account_number": "345678-9",
     "bank_agency": "1350",
     "requested_loan_amount_brl_text": "R$ 780.000,00",
     "requested_loan_amount_brl": 780000.00,
@@ -11,4 +12,20 @@
         "Holerites Jan/2025",
         "Holerites Fev/2025"
     ]
+}
+
+
+{
+Nome: Tokenization Convergente
+CPF: FPE Parcial Nao Deterministico :OK
+CNPJ: FPE Parcial Deterministico  :OK
+Endereço: Tokenization Nao Convergente :OK
+E-mail: FPE Total Nao Deterministico Nao Reversivel :OK
+Telefone:FPE Total Deterministico Nao Reversivel  :OK
+Valores: Tokenization Nao Convergente Irreversivel :OK
+Data: FPE Total Deterministico :OK
+Número de conta: FPE Parcial Deterministico  :OK
+Número de agência: FPE Parcial Deterministico  :OK
+Número de contrato: Tokenization Nao Convergente
+Produto/serviço:  Tokenization Nao Convergente
 }
