@@ -15,6 +15,7 @@ resource "vault_transform_role" "role" {
     vault_transform_transformation.cnpj_full_masking.name,
     vault_transform_transformation.cpf_partial_masking.name,
     vault_transform_transformation.cnpj_partial_masking.name,
-    vault_transform_transformation.tokenization_non_convergent.name
+    vault_transform_transformation.tokenization_non_convergent.name,
+    vault_transform_transformation.cpf_partial_fpe_deterministic.name
   ]
 }

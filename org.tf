@@ -1,0 +1,21 @@
+
+
+resource "vault_transform_role" "role" {
+  path = vault_mount.transform.path
+  name = "agent"
+  transformations = [
+    "nome",
+    "cpf",
+    "cnpj",
+    "endereco",
+    "email",
+    "telefone",
+    "data",
+    "agencia",
+    "conta",
+    "contrato",
+    "valores"
+  ]
+}
+
+#Templates
