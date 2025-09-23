@@ -75,7 +75,7 @@ resource "vault_transform_transformation" "conta" {
 resource "vault_transform_transformation" "agencia" {
   path             = vault_mount.transform.path
   name             = "agencia"
-  type             = "fpe"
+  type             = "masking"
   template         = vault_transform_template.bank_agency.name
   tweak_source     = "internal"
   allowed_roles    = ["*"]
@@ -106,6 +106,15 @@ resource "vault_transform_transformation" "contrato" {
 resource "vault_transform_transformation" "produto" {
   path             = vault_mount.transform.path
   name             = "produto"
+  type             = "tokenization"
+  allowed_roles    = ["*"]
+  deletion_allowed = true
+}
+
+# Tokenization Nao Convergente Irreversivel
+resource "vault_transform_transformation" "ticket" {
+  path             = vault_mount.transform.path
+  name             = "ticket"
   type             = "tokenization"
   allowed_roles    = ["*"]
   deletion_allowed = true

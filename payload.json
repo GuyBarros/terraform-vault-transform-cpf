@@ -1,0 +1,38 @@
+{
+    "batch_input": [
+      {
+        "encoded_value": "DaCJhefr1oZxxAV54F7gQqtMUhRuvLvhwQpvBGzEhFPWb5afuKkTBV4dzyLk8VDjrphZsiBTcgb6",
+        "reference": "nome"
+      },
+      {
+        "encoded_value": "416.274.782-09",
+        "reference": "cpf",
+        "tweak": "S599FhLd8g=="
+      },
+      {
+        "encoded_value": "76.716.926/2120-62",
+        "reference": "cnpj"
+      },
+      {
+        "encoded_value": "I1-gDB@abMy%0w6h",
+        "reference": "email",
+        "tweak": "P6ACJLUjZQ=="
+      },
+      {
+        "encoded_value": "667561-9",
+        "reference": "conta"
+      },
+      {
+        "encoded_value": "**34",
+        "reference": "agencia"
+      },
+      {
+        "encoded_value": "Q4tYgFXHxUXPVcDB2fNm4N4CdaonXExudnpF7HdKnzHDVtqJFYhmTW",
+        "reference": "contrato"
+      },
+      {
+        "encoded_value": "Q4tYgFXHxUbyHUhq7K75WiJDZzhg94jqEngUmdCt73rmhU845prcGT",
+        "reference": "produto"
+      }
+    ]
+  }

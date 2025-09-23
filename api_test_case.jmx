@@ -5,19 +5,16 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="transformation-encode">
-        <intProp name="ThreadGroup.num_threads">10</intProp>
+        <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <longProp name="ThreadGroup.duration">600</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
-        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">1</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
@@ -26,7 +23,7 @@
           <stringProp name="HTTPSampler.domain">vault-for-rfi-ibm-itau-a23a5e6b02259ac6.elb.us-east-2.amazonaws.com</stringProp>
           <stringProp name="HTTPSampler.port">8200</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.path">/v1/transform_brazilian_pii/encode/agent</stringProp>
+          <stringProp name="HTTPSampler.path">/v1/org/encode/agent</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -36,16 +33,11 @@
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{ &#xd;
-  &quot;batch_input&quot;:[{ &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;fpe_cpf&quot; },&#xd;
-    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf_fpe_non_deterministic&quot; },&#xd;
-    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj_partial_masking&quot; },&#xd;
-    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf_fpe_non_deterministic&quot; },&#xd;
-    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj_partial_masking&quot; },&#xd;
-    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf_fpe_non_deterministic&quot; },&#xd;
-    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj_partial_masking&quot; },&#xd;
-    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf_fpe_non_deterministic&quot; },&#xd;
-    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj_partial_masking&quot; },&#xd;
-    { &quot;value&quot; : &quot;myreal@email.com&quot;, &quot;transformation&quot; : &quot;tokenization_non_convergent&quot;, &quot;ttl&quot; : &quot;8h&quot;, &quot;metadata&quot; : { &quot;Organization&quot; : &quot;IBM&quot;, &quot;Purpose&quot; : &quot;Finance&quot;, &quot;Type&quot; : &quot;BR_PII&quot; } } &#xd;
+  &quot;batch_input&quot;:[ { &quot;value&quot; : &quot;Nome Exemplo&quot;, &quot;transformation&quot; : &quot;nome&quot; },&#xd;
+    { &quot;value&quot; : &quot;123.456.789-09&quot;, &quot;transformation&quot; : &quot;cpf&quot; },&#xd;
+    { &quot;value&quot; : &quot;76.537.694/0001-62&quot;, &quot;transformation&quot; : &quot;cnpj&quot; },&#xd;
+    { &quot;value&quot; : &quot;myreal@email.com&quot;, &quot;transformation&quot; : &quot;email&quot;, &quot;ttl&quot; : &quot;8h&quot;, &quot;metadata&quot; : { &quot;Organization&quot; : &quot;IBM&quot;, &quot;Purpose&quot; : &quot;Finance&quot;, &quot;Type&quot; : &quot;BR_PII&quot; } },&#xd;
+    { &quot;value&quot; : &quot;Rua das Palmeiras, 145 - São Paulo/SP&quot;, &quot;transformation&quot; : &quot;endereco&quot; }&#xd;
   ]&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>

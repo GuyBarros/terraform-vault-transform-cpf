@@ -14,7 +14,9 @@ resource "vault_transform_role" "role" {
     "agencia",
     "conta",
     "contrato",
-    "valores"
+    "valores",
+    "produto",
+    "ticket"
   ]
 }
 
