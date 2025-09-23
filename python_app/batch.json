@@ -1,0 +1,12 @@
+{ 
+  "batch_input":[ 
+    { "value" : "Nome Exemplo", "transformation" : "nome" , "reference": "nome" },
+    { "value" : "123.456.789-09", "transformation" : "cpf","reference": "cpf" },
+    { "value" : "76.537.694/0001-62", "transformation" : "cnpj","reference": "cnpj" },
+    { "value" : "myreal@email.com", "transformation" : "email", "ttl" : "8h", "metadata" : { "Organization" : "IBM", "Purpose" : "Finance", "Type" : "BR_PII" },"reference": "email" },
+    { "value" : "345678-9", "transformation" : "conta","reference": "conta" },
+    { "value" : "1234", "transformation" : "agencia","reference": "agencia" },
+    { "value" : "123456789012345", "transformation" : "contrato","reference": "contrato" },
+    { "value" : "emprestimo", "transformation" : "produto","reference": "produto" }
+  ] 
+}

@@ -52,6 +52,7 @@ resource "vault_transform_template" "br_date_mask_full" {
   name    = "date-mask-full"
   type    = "regex"
   pattern = "(\\d{2})/(\\d{2})/(\\d{4})"
+  alphabet = "builtin/numeric"
   depends_on = [vault_mount.transform]
 }
 
@@ -80,6 +81,7 @@ resource "vault_transform_template" "bank_agency" {
   path    = vault_mount.transform.path
   name    = "bank-agency"
   type    = "regex"
+  pattern = "(\\d{2})(?:\\d{2})"
   alphabet = "builtin/numeric"
 }
 
