@@ -20,7 +20,7 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="batch-encode">
-          <stringProp name="HTTPSampler.domain">vault-for-rfi-ibm-itau-a23a5e6b02259ac6.elb.us-east-2.amazonaws.com</stringProp>
+          <stringProp name="HTTPSampler.domain">VAULT_ADDR</stringProp>
           <stringProp name="HTTPSampler.port">8200</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/v1/org/encode/agent</stringProp>

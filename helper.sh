@@ -1,4 +1,4 @@
-export VAULT_ADDR=https://vault-for-rfi-ibm-itau-a23a5e6b02259ac6.elb.us-east-2.amazonaws.com:8200
+export VAULT_ADDR=VAULT_ADDR
 export VAULT_NAMESPACE=root
 export VAULT_TOKEN=<TOKEN>
 export VAULT_SKIP_VERIFY=true
@@ -128,7 +128,7 @@ vault write org/encode/agent transformation=ticket value='[{"encoded_value":"DaC
 
 vault write /sys/wrapping/wrap value="this is a test" ttl=30m
 
-curl --insecure -X PUT -H "X-Vault-Request: true" -H "X-Vault-Namespace: root/" -H "X-Vault-Token: $(vault print token)" -H "X-Vault-Wrap-Ttl: 5m" -d '{"ttl":"30m","value":"this is a test"}' https://vault-for-rfi-ibm-itau-a23a5e6b02259ac6.elb.us-east-2.amazonaws.com:8200/v1/sys/wrapping/wrap
+curl --insecure -X PUT -H "X-Vault-Request: true" -H "X-Vault-Namespace: root/" -H "X-Vault-Token: $(vault print token)" -H "X-Vault-Wrap-Ttl: 5m" -d '{"ttl":"30m","value":"this is a test"}' $VAULT_ADDR/v1/sys/wrapping/wrap
 
 
  vault write -output-curl-string org/encode/agent transformation=ticket value='[{"encoded_value":"DaCJhefr1oZxxAV54F7gQqtMUhRuvLvhwQpvBGzEhFPWb5afuKkTBV4dzyLk8VDjrphZsiBTcgb6","reference":"nome"},{"encoded_value":"634.094.043-09","reference":"cpf","tweak":"dlj0gYEkrg=="},{"encoded_value":"76.716.926/2120-62","reference":"cnpj"},{"encoded_value":"UbjKcX@aWwfPEd\u0026E","reference":"email","tweak":"mXLhwGyqTw=="},{"encoded_value":"Q4tYgFXHxUQuKib2qod9768kZbMEL88f1xsrJH8rgPKWBxqvgDQdvy","reference":"endereco"},{"encoded_value":"667561-9","reference":"conta"},{"encoded_value":"734463","reference":"agencia"},{"encoded_value":"Q4tYgFXHxUNQ8G9cuJRo9au1wsA9Bg7Jh9NfAVrAJWV8AZ7Q6eDCNH","reference":"contrato"},{"encoded_value":"Q4tYgFXHxUc4xPxkm8kgLmK67qhK5enyBhLwwEU8MMDv963WUY55iT","reference":"produto"}]'
