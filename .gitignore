@@ -39,3 +39,5 @@ terraform.rc
 *.env
 .python-version
 *__pycache__/
+
+guy_vault/
