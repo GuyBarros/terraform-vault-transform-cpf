@@ -32,7 +32,7 @@ client = hvac.Client(
     url=VAULT_ADDR,
     token=VAULT_TOKEN,
     namespace=VAULT_NAMESPACE,
-    verify=False
+    verify='./certs/bundle.pem'
     )
 
 print(client.is_authenticated())

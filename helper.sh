@@ -1,6 +1,7 @@
-export VAULT_ADDR=https://vault-for-rfi-ibm-itau-a23a5e6b02259ac6.elb.us-east-2.amazonaws.com:8200
+#VAULT ENVIRONMENT VARIABLES
+export VAULT_TOKEN=<YOUR_VAULT_TOKEN>
 export VAULT_NAMESPACE=root
-export VAULT_TOKEN=<TOKEN>
+export VAULT_ADDR=<YOUR_VAULT_ADDRESS>
 export VAULT_SKIP_VERIFY=true
 
 vault write org/transformations/tokenization/nome \
@@ -128,10 +129,12 @@ vault write org/encode/agent transformation=ticket value='[{"encoded_value":"DaC
 
 vault write /sys/wrapping/wrap value="this is a test" ttl=30m
 
-curl --insecure -X PUT -H "X-Vault-Request: true" -H "X-Vault-Namespace: root/" -H "X-Vault-Token: $(vault print token)" -H "X-Vault-Wrap-Ttl: 5m" -d '{"ttl":"30m","value":"this is a test"}' https://vault-for-rfi-ibm-itau-a23a5e6b02259ac6.elb.us-east-2.amazonaws.com:8200/v1/sys/wrapping/wrap
+curl --insecure -X PUT -H "X-Vault-Request: true" -H "X-Vault-Namespace: root/" -H "X-Vault-Token: $(vault print token)" -H "X-Vault-Wrap-Ttl: 5m" -d '{"ttl":"30m","value":"this is a test"}' $VAULT_ADDR/v1/sys/wrapping/wrap
 
 
  vault write -output-curl-string org/encode/agent transformation=ticket value='[{"encoded_value":"DaCJhefr1oZxxAV54F7gQqtMUhRuvLvhwQpvBGzEhFPWb5afuKkTBV4dzyLk8VDjrphZsiBTcgb6","reference":"nome"},{"encoded_value":"634.094.043-09","reference":"cpf","tweak":"dlj0gYEkrg=="},{"encoded_value":"76.716.926/2120-62","reference":"cnpj"},{"encoded_value":"UbjKcX@aWwfPEd\u0026E","reference":"email","tweak":"mXLhwGyqTw=="},{"encoded_value":"Q4tYgFXHxUQuKib2qod9768kZbMEL88f1xsrJH8rgPKWBxqvgDQdvy","reference":"endereco"},{"encoded_value":"667561-9","reference":"conta"},{"encoded_value":"734463","reference":"agencia"},{"encoded_value":"Q4tYgFXHxUNQ8G9cuJRo9au1wsA9Bg7Jh9NfAVrAJWV8AZ7Q6eDCNH","reference":"contrato"},{"encoded_value":"Q4tYgFXHxUc4xPxkm8kgLmK67qhK5enyBhLwwEU8MMDv963WUY55iT","reference":"produto"}]'
+
+vault write org/encode/agent transformation=ticket value='[{"encoded_value":"DaCJhefr1oZxxAV54F7gQqtMUhRuvLvhwQpvBGzEhFPWb5afuKkTBV4dzyLk8VDjrphZsiBTcgb6","reference":"nome"},{"encoded_value":"634.094.043-09","reference":"cpf","tweak":"dlj0gYEkrg=="},{"encoded_value":"76.716.926/2120-62","reference":"cnpj"},{"encoded_value":"UbjKcX@aWwfPEd\u0026E","reference":"email","tweak":"mXLhwGyqTw=="},{"encoded_value":"Q4tYgFXHxUQuKib2qod9768kZbMEL88f1xsrJH8rgPKWBxqvgDQdvy","reference":"endereco"},{"encoded_value":"667561-9","reference":"conta"},{"encoded_value":"734463","reference":"agencia"},{"encoded_value":"Q4tYgFXHxUNQ8G9cuJRo9au1wsA9Bg7Jh9NfAVrAJWV8AZ7Q6eDCNH","reference":"contrato"},{"encoded_value":"Q4tYgFXHxUc4xPxkm8kgLmK67qhK5enyBhLwwEU8MMDv963WUY55iT","reference":"produto"}]'
 
  curl --insecure -X PUT -H "X-Vault-Namespace: root/" \
  -H "X-Vault-Request: true" -H "X-Vault-Token: $(vault print token)" \
@@ -143,3 +146,15 @@ curl --insecure -X PUT -H "X-Vault-Request: true" -H "X-Vault-Namespace: root/" 
  -H "X-Vault-Request: true" -H "X-Vault-Token: $(vault print token)" \
   -d '{"transformation":"ticket","value":"{"batch_results":[{"encoded_value":"DaCJhefr1oZxxAV54F7gQqtMUhRuvLvhwQpvBGzEhFPWb5afuKkTBV4dzyLk8VDjrphZsiBTcgb6","reference":"nome"},{"encoded_value":"740.223.740-09","reference":"cpf","tweak":"Vg19awnu9w=="},{"encoded_value":"76.716.926/2120-62","reference":"cnpj"},{"encoded_value":"20rBF-@x9bj3mAWS","reference":"email","tweak":"P9S8+f5IKw=="},{"encoded_value":"Q4tYgFXHxUT9Shhms8GvzkcvesY9oeK7pujgcSwLKryxdrFMbS5vE2","reference":"endereco"},{"encoded_value":"667561-9","reference":"conta"},{"encoded_value":"734463","reference":"agencia"},{"encoded_value":"Q4tYgFXHxUSseeYVgvCShEk56ZbawyHUaV1JjYTBv6MXssH9JHXMtx","reference":"contrato"},{"encoded_value":"Q4tYgFXHxUWKfH3k73BTKBHDbtskhRCQdgJtMgJwHKoMiERX8zXmt5","reference":"produto"}]}"}' \
    $VAULT_ADDR/v1/sys/wrapping/wrap | jq .
+
+
+
+
+
+
+#####################
+
+curl --insecure -X PUT -H "X-Vault-Request: true" -H "X-Vault-Namespace: root/" -H "X-Vault-Token: $(vault print token)" -d '{\"transformation\": \"ticket\", \"value\": \"[{\"encoded_value\": \"DaCJhefr1oWnDFpjWrm2vhmi69nKq4r12CrJ29rusgnMCCSRYRXExDDTmr41Ch4cFZcKVkfQSWv3\", \"reference\": \"nome\"}, {\"encoded_value\": \"808.350.952-00\", \"reference\": \"cpf\", \"tweak\": \"bbkDHlcHkw==\"}, {\"encoded_value\": \"556*\", \"reference\": \"agencia\"}, {\"encoded_value\": \"255376-4\", "reference": "conta"}, {"encoded_value": "Q4tYgFXHxUYg6uTRHSccKJ1Vxzbo6QWhnTJtjX5ScVJSUbQqpYD4be", "reference": "produto"}]'}' $VAULT_ADDR/v1/org/encode/agent
+
+
+vault write org/encode/agent transformation=ticket value='[{"encoded_value": "DaCJhefr1oWnDFpjWrm2vhmi69nKq4r12CrJ29rusgnMCCSRYRXExDDTmr41Ch4cFZcKVkfQSWv3", "reference": "nome"}, {"encoded_value": "808.350.952-00", "reference": "cpf", "tweak": "bbkDHlcHkw=="}, {"encoded_value": "556*", "reference": "agencia"}, {"encoded_value": "255376-4", "reference": "conta"}, {"encoded_value": "Q4tYgFXHxUYg6uTRHSccKJ1Vxzbo6QWhnTJtjX5ScVJSUbQqpYD4be", "reference": "produto"}]'
