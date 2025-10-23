@@ -79,7 +79,7 @@ resource "vault_transform_transformation" "data" {
   deletion_allowed = true
 }
 
-# FPE Parcial Deterministico
+# FPE Total Deterministico
 resource "vault_transform_transformation" "rg" {
   path             = vault_mount.transform.path
   name             = "rg"
@@ -90,7 +90,7 @@ resource "vault_transform_transformation" "rg" {
   deletion_allowed = true
 }
 
-# FPE Parcial Nao Deterministico
+# FPE Total Nao Deterministico
 resource "vault_transform_transformation" "cnh" {
   path             = vault_mount.transform.path
   name             = "cnh"
@@ -101,7 +101,7 @@ resource "vault_transform_transformation" "cnh" {
   deletion_allowed = true
 }
 
-# FPE Parcial Nao Deterministico
+# FPE Total Nao Deterministico
 resource "vault_transform_transformation" "cartao" {
   path             = vault_mount.transform.path
   name             = "cartao"

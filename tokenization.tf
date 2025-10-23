@@ -272,3 +272,114 @@ resource "vault_generic_endpoint" "ticket_tokenization" {
 
   depends_on = [vault_generic_endpoint.ticket_store]
 }
+
+###############################
+# Tokenization Convergente Reversível
+resource "vault_generic_endpoint" "pix_store" {
+  path                 = "${vault_mount.transform.path}/stores/pix_store"
+  ignore_absent_fields = true
+  # Many endpoints don't return all fields; avoid spurious drift:
+  disable_read = true
+
+  data_json = jsonencode({
+    type                 = "sql",
+    driver               = "postgres",
+    connection_string    = local.pg_conn,
+    username             = var.db_user,
+    password             = var.db_password,
+    supported_transformations = ["tokenization"]
+  })
+
+  depends_on = [vault_mount.transform]
+}
+
+# Tokenization Convergente
+resource "vault_generic_endpoint" "pix_tokenization" {
+  path                 = "${vault_mount.transform.path}/transformations/tokenization/pix"
+  ignore_absent_fields = true
+  disable_read         = true
+
+  data_json = jsonencode({
+    mapping_mode  = "default",
+    convergent    = true,           # set true for deterministic tokens (with caveats)
+    allowed_roles = ["${vault_transform_role.role.name}"], # who may use this transform
+    stores        = ["pix_store"],
+    deletion_allowed = true
+  })
+
+  depends_on = [vault_generic_endpoint.nome_store_schema]
+}
+
+###############################
+# Tokenization Convergente Reversível
+resource "vault_generic_endpoint" "empresa_store" {
+  path                 = "${vault_mount.transform.path}/stores/empresa_store"
+  ignore_absent_fields = true
+  # Many endpoints don't return all fields; avoid spurious drift:
+  disable_read = true
+
+  data_json = jsonencode({
+    type                 = "sql",
+    driver               = "postgres",
+    connection_string    = local.pg_conn,
+    username             = var.db_user,
+    password             = var.db_password,
+    supported_transformations = ["tokenization"]
+  })
+
+  depends_on = [vault_mount.transform]
+}
+
+# Tokenization Convergente
+resource "vault_generic_endpoint" "empresa_tokenization" {
+  path                 = "${vault_mount.transform.path}/transformations/tokenization/empresa"
+  ignore_absent_fields = true
+  disable_read         = true
+
+  data_json = jsonencode({
+    mapping_mode  = "default",
+    convergent    = true,           # set true for deterministic tokens (with caveats)
+    allowed_roles = ["${vault_transform_role.role.name}"], # who may use this transform
+    stores        = ["empresa_store"],
+    deletion_allowed = true
+  })
+
+  depends_on = [vault_generic_endpoint.nome_store_schema]
+}
+
+###############################
+# Tokenization Convergente Reversível
+resource "vault_generic_endpoint" "outros_store" {
+  path                 = "${vault_mount.transform.path}/stores/outros_store"
+  ignore_absent_fields = true
+  # Many endpoints don't return all fields; avoid spurious drift:
+  disable_read = true
+
+  data_json = jsonencode({
+    type                 = "sql",
+    driver               = "postgres",
+    connection_string    = local.pg_conn,
+    username             = var.db_user,
+    password             = var.db_password,
+    supported_transformations = ["tokenization"]
+  })
+
+  depends_on = [vault_mount.transform]
+}
+
+# Tokenization Convergente
+resource "vault_generic_endpoint" "outros_tokenization" {
+  path                 = "${vault_mount.transform.path}/transformations/tokenization/outros"
+  ignore_absent_fields = true
+  disable_read         = true
+
+  data_json = jsonencode({
+    mapping_mode  = "default",
+    convergent    = true,           # set true for deterministic tokens (with caveats)
+    allowed_roles = ["${vault_transform_role.role.name}"], # who may use this transform
+    stores        = ["outros_store"],
+    deletion_allowed = true
+  })
+
+  depends_on = [vault_generic_endpoint.nome_store_schema]
+}

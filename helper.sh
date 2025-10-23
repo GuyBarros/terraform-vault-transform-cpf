@@ -35,6 +35,28 @@ vault write org/encode/agent value="123456789012345" transformation=contrato
 #Produto/serviço:  Tokenization Nao Convergente
 vault write org/encode/agent value="emprestimo" transformation=produto
 vault write org/decode/agent value="Q4tYgFXHxUXY3itjTBkFpdqSd5nP2qiVoBH2MsNzGSppZNbr8quWBN" transformation=produto
+#RG:FPE Total Deterministico
+vault write org/encode/agent value=012.345.678-3 transformation=rg
+vault write org/encode/agent value=12.345.678 transformation=rg
+vault write org/encode/agent value=0123456783 transformation=rg
+vault write org/encode/agent value=12345678 transformation=rg
+vault write org/encode/agent value=012345678-X transformation=rg
+vault write org/encode/agent value=012345678/X transformation=rg
+#CNH: FPE Totoal Nao Deterministico 
+vault write org/encode/agent value=12345678901  transformation=cnh
+vault write org/encode/agent value=123.456.789.01  transformation=cnh
+vault write org/encode/agent value=123.456.789-01  transformation=cnh
+vault write org/encode/agent value=123456.789-01  transformation=cnh
+vault write org/encode/agent value=123456789-01  transformation=cnh
+vault write org/encode/agent value=123456789  transformation=cnh
+vault write org/encode/agent value=123456789-012  transformation=cnh
+vault write org/encode/agent value=123456789/012  transformation=cnh
+#Cartão de crédito: FPE Total Nao Deterministico
+vault write org/encode/agent value="4111-1111-1111-1111" transformation=cartao
+vault write org/encode/agent value="4111111111111111" transformation=cartao
+vault write org/encode/agent value="4111 1111 1111 1111" transformation=cartao
+
+
 #vault write org/encode/agent
 
 vault write org/transformations/tokenization/ticket \

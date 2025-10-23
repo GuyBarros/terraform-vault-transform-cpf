@@ -19,7 +19,10 @@ resource "vault_transform_role" "role" {
     "ticket",
     "cnh",
     "cartao",
-    "rg"
+    "rg",
+    "empresa",
+    "pix",
+    "outros"
   ]
 }
 
