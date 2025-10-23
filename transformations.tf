@@ -3,7 +3,7 @@ resource "vault_transform_transformation" "cpf" {
   path             = vault_mount.transform.path
   name             = "cpf"
   type             = "fpe"
-  template         = vault_transform_template.cpf-mask-first9.name
+  template         = vault_transform_template.cpf-template.name
   tweak_source     = "generated"
   allowed_roles    = ["${vault_transform_role.role.name}"]
   deletion_allowed = true
@@ -14,7 +14,7 @@ resource "vault_transform_transformation" "cnpj" {
   path             = vault_mount.transform.path
   name             = "cnpj"
   type             = "fpe"
-  template         = vault_transform_template.cnpj-mask-middle10.name
+  template         = vault_transform_template.cnpj-template.name
   tweak_source     = "internal"
   allowed_roles    = ["${vault_transform_role.role.name}"]
   deletion_allowed = true
