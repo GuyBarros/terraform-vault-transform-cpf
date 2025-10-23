@@ -1,8 +1,9 @@
+
 resource "vault_transform_template" "cnpj-template" {
   path     = vault_mount.transform.path
   name     = "brazilian_cnpj"
   type     = "regex"
-  pattern  = "(^\\d{2})\\.?(\\d{3})\\.?(\\d{3})/?(\\d{4})-?(\\d{2}$)"
+  pattern  = "(^.{2})\\.?(.{3})\\.?(.{3})[/\\.-]?(.{4})[-\\./]?(.{2}$)"
   alphabet = "builtin/numeric"
 }
 
@@ -10,7 +11,7 @@ resource "vault_transform_template" "cpf-template" {
   path     = vault_mount.transform.path
   name     = "brazilian_cpf"
   type     = "regex"
-  pattern  = "(^\\d{3})\\.?(\\d{3})\\.?(\\d{3})-?(\\d{2}$)"
+  pattern  = "(^.{3})\\.?(.{3})\\.?(.{3})[-\\./]?(.{2}$)"
   alphabet = "builtin/numeric"
 }
 
@@ -18,7 +19,7 @@ resource "vault_transform_template" "cpf-mask-first9" {
   path     = vault_mount.transform.path
   name     = "cpf-mask-first9"
   type     = "regex"
-  pattern  = "(^\\d{3})\\.?(\\d{3})\\.?(\\d{3})-?(\\d{2}$)"
+  pattern  = "(^.{2})\\.?(.{3})\\.?(.{3})[/\\.-]?(.{4})[-\\./]?.{2}$"
   alphabet = "builtin/numeric"
 }
 
@@ -26,7 +27,7 @@ resource "vault_transform_template" "cnpj-mask-middle10" {
   path     = vault_mount.transform.path
   name     = "cnpj-mask-middle10"
   type     = "regex"
-  pattern  = "(^\\d{2})\\.?(\\d{3})\\.?(\\d{3})/?(\\d{4})-?(\\d{2}$)"
+  pattern  = "(^.{2})\\.?(.{3})\\.?(.{3})[/\\.-]?(.{4})[-\\./]?(.{2}$)"
   alphabet = "builtin/numeric"
 }
 
@@ -45,13 +46,12 @@ resource "vault_transform_template" "email-template" {
   alphabet = vault_transform_alphabet.general_email_alphabet.name
 }
 
-
-
+# e.g. "01/01/2025", "01-01-2025", "01012025"
 resource "vault_transform_template" "br_date_mask_full" {
   path       = vault_mount.transform.path
   name       = "date-mask-full"
   type       = "regex"
-  pattern    = "(\\d{2})/(\\d{2})/(\\d{4})"
+  pattern    = "(\\d{2})[\\./-]?(\\d{2})[\\./-]?(\\d{4})"
   alphabet   = "builtin/numeric"
   depends_on = [vault_mount.transform]
 }
@@ -85,3 +85,18 @@ resource "vault_transform_template" "bank_agency" {
   alphabet = "builtin/numeric"
 }
 
+resource "vault_transform_template" "rg-template" {
+  path     = vault_mount.transform.path
+  name     = "rg"
+  type     = "regex"
+  pattern  = "(^\\d{1,3})\\.?(\\d{3})\\.?(\\d{3})[-\\./]?.{0,3}$"
+  alphabet = "builtin/numeric"
+}
+
+resource "vault_transform_template" "cnh-template" {
+  path     = vault_mount.transform.path
+  name     = "cnh"
+  type     = "regex"
+  pattern  = "(^\\d{0,3})\\.?(\\d{0,3})\\.?(\\d{0,3})[-\\./]?(\\d{0,3}$)"
+  alphabet = "builtin/numeric"
+}

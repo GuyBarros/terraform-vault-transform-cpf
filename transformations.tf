@@ -79,3 +79,35 @@ resource "vault_transform_transformation" "data" {
   deletion_allowed = true
 }
 
+# FPE Parcial Deterministico
+resource "vault_transform_transformation" "rg" {
+  path             = vault_mount.transform.path
+  name             = "rg"
+  type             = "fpe"
+  template         = vault_transform_template.rg-template.name
+  tweak_source     = "internal"
+  allowed_roles    = ["${vault_transform_role.role.name}"]
+  deletion_allowed = true
+}
+
+# FPE Parcial Nao Deterministico
+resource "vault_transform_transformation" "cnh" {
+  path             = vault_mount.transform.path
+  name             = "cnh"
+  type             = "fpe"
+  template         = vault_transform_template.cnh-template.name
+  tweak_source     = "generated"
+  allowed_roles    = ["${vault_transform_role.role.name}"]
+  deletion_allowed = true
+}
+
+# FPE Parcial Nao Deterministico
+resource "vault_transform_transformation" "cartao" {
+  path             = vault_mount.transform.path
+  name             = "cartao"
+  type             = "fpe"
+  template         = "builtin/creditcardnumber"
+  tweak_source     = "generated"
+  allowed_roles    = ["${vault_transform_role.role.name}"]
+  deletion_allowed = true
+}
