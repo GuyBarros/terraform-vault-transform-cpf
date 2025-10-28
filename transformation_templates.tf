@@ -42,7 +42,7 @@ resource "vault_transform_template" "email-template" {
   path     = vault_mount.transform.path
   name     = "email"
   type     = "regex"
-  pattern  = "^([A-Za-z0-9._%+\\-&]+)@([A-Za-z0-9._%+\\-&]+)$"
+  pattern  = "(^.*)@.*$"
   alphabet = vault_transform_alphabet.general_email_alphabet.name
 }
 
