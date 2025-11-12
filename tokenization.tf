@@ -86,13 +86,14 @@ resource "vault_generic_endpoint" "nome_tokenization" {
   data_json = jsonencode({
     mapping_mode  = "default",
     convergent    = true,           # set true for deterministic tokens (with caveats)
-    allowed_roles = ["*"], # who may use this transform
+    allowed_roles = ["${vault_transform_role.role.name}"], # who may use this transform
     stores        = ["nome_store"],
     deletion_allowed = true
   })
 
   depends_on = [vault_generic_endpoint.nome_store_schema]
 }
+
 ###############################
 resource "vault_generic_endpoint" "endereco_store" {
   path                 = "${vault_mount.transform.path}/stores/endereco_store"
