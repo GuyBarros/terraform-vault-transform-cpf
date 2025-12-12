@@ -71,7 +71,7 @@ resource "vault_transform_template" "bank_acct_mask_first6" {
   path     = vault_mount.transform.path
   name     = "bank-account"
   type     = "regex"
-  pattern  = "(\\d{6})(?:-?)(?:\\d{1})"
+  pattern  = "^(\\d{5,8})[ \\-\\/\\.]?(\\d)$"
   alphabet = "builtin/numeric"
 }
 
